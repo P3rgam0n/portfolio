@@ -1,16 +1,31 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Projects from '../components/Projects.astro';
+import Technologies from '../components/Technologies.astro';
+import Experiments from '../components/Experiments.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+
+const lang = 'en' as const;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="Michał Jura — 3D Graphics & Automation Specialist"
+  description="Portfolio of Michał Jura (P3rgam0n) — 3D Graphics & Automation Specialist. Python, Google Cloud AI, Gemini, ComfyUI, Amazon Bedrock, Windows tools."
+  lang={lang}
+>
+  <Nav lang={lang} />
+  <main>
+    <Hero lang={lang} />
+    <About lang={lang} />
+    <Projects lang={lang} />
+    <Technologies lang={lang} />
+    <Experiments lang={lang} />
+    <Contact lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</Layout>
+

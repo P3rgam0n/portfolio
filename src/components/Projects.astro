@@ -1,0 +1,59 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import { projects, categories, type ProjectCategory } from '../data/projects';
+
+interface Props { lang: 'en' | 'pl'; }
+const { lang } = Astro.props;
+
+const mainProjects = projects.filter(p =>
+  p.category === 'AI & Automation' || p.category === 'ComfyUI Plugins' || p.category === 'Windows Utilities' || p.category === 'Web Development'
+);
+
+const categoryLabels: Record<ProjectCategory, { en: string; pl: string }> = {
+  'AI & Automation': { en: '🤖 AI & Automation', pl: '🤖 AI i Automatyzacja' },
+  'ComfyUI Plugins': { en: '🎨 ComfyUI Plugins', pl: '🎨 Pluginy ComfyUI' },
+  'Windows Utilities': { en: '🪟 Windows Utilities', pl: '🪟 Narzędzia Windows' },
+  'Web Development': { en: '🌐 Web Development', pl: '🌐 Web Development' },
+  'Experiments': { en: '🧪 Experiments', pl: '🧪 Eksperymenty' },
+};
+
+const mainCategories: ProjectCategory[] = ['AI & Automation', 'ComfyUI Plugins', 'Windows Utilities', 'Web Development'];
+---
+
+<section id="projects" class="py-28 px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <!-- Section header -->
+    <div class="mb-16">
+      <span class="text-indigo-400 text-xs font-bold tracking-widest uppercase mb-4 block">
+        {lang === 'en' ? 'Work' : 'Praca'}
+      </span>
+      <h2 class="text-4xl md:text-5xl font-black text-white mb-4">
+        {lang === 'en' ? 'Selected Projects' : 'Wybrane projekty'}
+      </h2>
+      <p class="text-white/40 text-base max-w-xl leading-relaxed">
+        {lang === 'en'
+          ? 'Production-grade software across AI tooling, creative automation, and developer utilities. Most repositories are private — descriptions represent real, verified capabilities.'
+          : 'Oprogramowanie klasy produkcyjnej z zakresu narzędzi AI, automatyzacji kreatywnej i narzędzi deweloperskich. Większość repozytoriów jest prywatna — opisy przedstawiają rzeczywiste, zweryfikowane możliwości.'}
+      </p>
+    </div>
+
+    <!-- Projects by category -->
+    {mainCategories.map(cat => {
+      const catProjects = mainProjects.filter(p => p.category === cat);
+      if (!catProjects.length) return null;
+      return (
+        <div class="mb-16">
+          <h3 class="text-base font-bold text-white/30 mb-6 uppercase tracking-widest text-sm">
+            {categoryLabels[cat][lang]}
+          </h3>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {catProjects.map(project => (
+              <ProjectCard project={project} lang={lang} />
+            ))}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</section>

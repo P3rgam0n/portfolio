@@ -1,0 +1,94 @@
+---
+interface Props {
+  lang: 'en' | 'pl';
+  onToggleLang?: string;
+}
+const { lang } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<header
+  id="nav"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+>
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a
+      href={`${base}/`}
+      class="text-sm font-bold tracking-widest text-white/70 hover:text-white transition-colors uppercase"
+      aria-label="Home"
+    >
+      P3RGAM0N
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8" aria-label="Main navigation">
+      <a href="#about" class="nav-link">{lang === 'en' ? 'About' : 'O mnie'}</a>
+      <a href="#projects" class="nav-link">{lang === 'en' ? 'Projects' : 'Projekty'}</a>
+      <a href="#technologies" class="nav-link">{lang === 'en' ? 'Technologies' : 'Technologie'}</a>
+      <a href="#experiments" class="nav-link">{lang === 'en' ? 'Experiments' : 'Eksperymenty'}</a>
+      <a href="#contact" class="nav-link">{lang === 'en' ? 'Contact' : 'Kontakt'}</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <!-- Language Toggle -->
+      <button
+        id="lang-toggle"
+        class="px-3 py-1.5 text-xs font-semibold rounded-full border border-white/10 text-white/60 hover:text-white hover:border-white/30 transition-all"
+        aria-label="Toggle language"
+        data-lang={lang}
+      >
+        {lang === 'en' ? 'PL' : 'EN'}
+      </button>
+
+      <!-- GitHub -->
+      <a
+        href="https://github.com/P3rgam0n"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="px-4 py-1.5 text-xs font-semibold rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/25 transition-all text-white/80 hover:text-white"
+        aria-label="GitHub profile"
+      >
+        GitHub
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  #nav {
+    background: linear-gradient(to bottom, #0a0a0fdd, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+  }
+  #nav.scrolled {
+    background: #0a0a0fee;
+    border-bottom-color: #ffffff10;
+  }
+  .nav-link {
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .nav-link:hover { color: rgba(255,255,255,0.9); }
+</style>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) nav?.classList.add('scrolled');
+    else nav?.classList.remove('scrolled');
+  });
+
+  // Language toggle: switches between / and /pl
+  document.getElementById('lang-toggle')?.addEventListener('click', () => {
+    const currentLang = document.getElementById('lang-toggle')?.dataset.lang;
+    const base = import.meta.env.BASE_URL ?? '/portfolio';
+    if (currentLang === 'en') {
+      window.location.href = base + '/pl/';
+    } else {
+      window.location.href = base + '/';
+    }
+  });
+</script>

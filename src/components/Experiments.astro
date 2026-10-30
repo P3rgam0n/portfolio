@@ -1,0 +1,31 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import { projects } from '../data/projects';
+
+interface Props { lang: 'en' | 'pl'; }
+const { lang } = Astro.props;
+
+const expProjects = projects.filter(p => p.category === 'Experiments');
+---
+
+<section id="experiments" class="py-28 px-6 border-t border-white/[0.04]">
+  <div class="max-w-6xl mx-auto">
+    <span class="text-indigo-400 text-xs font-bold tracking-widest uppercase mb-4 block">
+      {lang === 'en' ? 'Lab' : 'Laboratorium'}
+    </span>
+    <h2 class="text-4xl md:text-5xl font-black text-white mb-4">
+      {lang === 'en' ? 'Experiments' : 'Eksperymenty'}
+    </h2>
+    <p class="text-white/40 text-base mb-14 max-w-xl leading-relaxed">
+      {lang === 'en'
+        ? 'Side projects and research tools that solve specific problems or explore new techniques. Smaller in scope but production-quality in execution.'
+        : 'Projekty poboczne i narzędzia badawcze rozwiązujące konkretne problemy lub eksplorujące nowe techniki. Mniejszy zakres, ale produkcyjna jakość wykonania.'}
+    </p>
+
+    <div class="grid sm:grid-cols-2 gap-5 max-w-3xl">
+      {expProjects.map(project => (
+        <ProjectCard project={project} lang={lang} />
+      ))}
+    </div>
+  </div>
+</section>

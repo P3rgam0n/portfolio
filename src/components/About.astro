@@ -1,0 +1,82 @@
+---
+interface Props { lang: 'en' | 'pl'; }
+const { lang } = Astro.props;
+
+const heading = { en: 'About', pl: 'O mnie' };
+const paragraphs = {
+  en: [
+    "I'm a developer and 3D specialist based in Poland, focused on building tools that bridge creative workflows with AI automation. My work spans multi-agent research systems, AI image generation pipelines, ComfyUI plugin ecosystems, and practical Windows desktop utilities.",
+    "I approach every project with an engineering-first mindset: production-grade reliability, comprehensive test coverage, and clean modular architecture. Most of what I build is private infrastructure powering real workflows — the projects you see here represent a slice of that work.",
+    "My current focus is on AI tooling for creative industries — particularly furniture visualization, product photography automation, and intelligent research assistants."
+  ],
+  pl: [
+    "Jestem deweloperem i specjalistą 3D z Polski, skoncentrowanym na tworzeniu narzędzi łączących kreatywne workflow z automatyzacją AI. Moje projekty obejmują wieloagentowe systemy badawcze, pipeline'y generowania obrazów AI, ekosystemy pluginów ComfyUI i praktyczne narzędzia desktopowe dla Windows.",
+    "Do każdego projektu podchodzę z myślą o niezawodności klasy produkcyjnej, pełnym pokryciu testami i czystej, modularnej architekturze. Większość tego, co buduję, to prywatna infrastruktura napędzająca realne workflow — projekty prezentowane tutaj to wycinek tej pracy.",
+    "Obecny fokus: narzędzia AI dla branży kreatywnej — wizualizacja mebli, automatyzacja fotografii produktowej i inteligentne asystenty badawcze."
+  ],
+};
+
+const stats = [
+  { value: '11', label: { en: 'Production Projects', pl: 'Projektów produkcyjnych' } },
+  { value: '500+', label: { en: 'Tests Written', pl: 'Napisanych testów' } },
+  { value: '5+', label: { en: 'AI Providers Integrated', pl: 'Dostawców AI' } },
+  { value: '4K', label: { en: 'Max Image Resolution', pl: 'Maks. rozdzielczość' } },
+];
+---
+
+<section id="about" class="py-28 px-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-start">
+
+      <!-- Left: text -->
+      <div>
+        <span class="text-indigo-400 text-xs font-bold tracking-widest uppercase mb-4 block">
+          {heading[lang]}
+        </span>
+        <h2 class="text-4xl md:text-5xl font-black text-white mb-8 leading-tight">
+          {lang === 'en' ? 'Building tools that matter' : 'Buduję narzędzia, które działają'}
+        </h2>
+        <div class="space-y-5">
+          {paragraphs[lang].map(p => (
+            <p class="text-white/55 leading-relaxed text-base">{p}</p>
+          ))}
+        </div>
+
+        <div class="mt-10 flex gap-4">
+          <a
+            href="https://www.modelli.pl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-sm font-medium text-indigo-400 hover:text-indigo-300 transition-colors"
+          >
+            modelli.pl
+            <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
+              <path d="M2 2h10M12 2v10M2 12l10-10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </a>
+          <a
+            href="https://github.com/P3rgam0n"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-sm font-medium text-white/40 hover:text-white/70 transition-colors"
+          >
+            GitHub
+            <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
+              <path d="M2 2h10M12 2v10M2 12l10-10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: stats grid -->
+      <div class="grid grid-cols-2 gap-4">
+        {stats.map((s) => (
+          <div class="p-6 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-white/10 transition-colors">
+            <div class="text-4xl font-black gradient-text mb-2">{s.value}</div>
+            <div class="text-sm text-white/40 font-medium">{s.label[lang]}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

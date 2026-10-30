@@ -1,0 +1,22 @@
+---
+interface Props { lang: 'en' | 'pl'; }
+const { lang } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="py-10 px-6 border-t border-white/[0.04]">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="text-xs text-white/20">
+      © {year} Michał Jura · P3rgam0n ·
+      {lang === 'en' ? 'Built with' : 'Zbudowane z'}
+      <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="hover:text-white/50 transition-colors">Astro</a>
+      +
+      <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="hover:text-white/50 transition-colors">Tailwind</a>
+    </p>
+    <p class="text-xs text-white/15">
+      {lang === 'en'
+        ? 'Private repository code is not publicly available.'
+        : 'Kod prywatnych repozytoriów nie jest publicznie dostępny.'}
+    </p>
+  </div>
+</footer>

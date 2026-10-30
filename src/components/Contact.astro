@@ -1,0 +1,62 @@
+---
+interface Props { lang: 'en' | 'pl'; }
+const { lang } = Astro.props;
+
+const items = {
+  en: [
+    { icon: '✉️', label: 'Email', value: 'michal@modelli.pl', href: 'mailto:michal@modelli.pl' },
+    { icon: '🌐', label: 'Website', value: 'modelli.pl', href: 'https://www.modelli.pl' },
+    { icon: '💻', label: 'GitHub', value: 'github.com/P3rgam0n', href: 'https://github.com/P3rgam0n' },
+  ],
+  pl: [
+    { icon: '✉️', label: 'Email', value: 'michal@modelli.pl', href: 'mailto:michal@modelli.pl' },
+    { icon: '🌐', label: 'Strona', value: 'modelli.pl', href: 'https://www.modelli.pl' },
+    { icon: '💻', label: 'GitHub', value: 'github.com/P3rgam0n', href: 'https://github.com/P3rgam0n' },
+  ],
+};
+---
+
+<section id="contact" class="py-28 px-6 border-t border-white/[0.04]">
+  <div class="max-w-4xl mx-auto">
+
+    <div class="relative rounded-3xl border border-white/[0.07] bg-[#16161f] p-12 md:p-16 overflow-hidden">
+
+      <!-- BG glow -->
+      <div aria-hidden="true" class="pointer-events-none absolute -top-20 -right-20 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl"></div>
+      <div aria-hidden="true" class="pointer-events-none absolute -bottom-20 -left-20 w-64 h-64 bg-purple-600/8 rounded-full blur-3xl"></div>
+
+      <div class="relative z-10">
+        <span class="text-indigo-400 text-xs font-bold tracking-widest uppercase mb-4 block">
+          {lang === 'en' ? 'Contact' : 'Kontakt'}
+        </span>
+        <h2 class="text-4xl md:text-5xl font-black text-white mb-4">
+          {lang === 'en' ? "Let's work together" : 'Porozmawiajmy'}
+        </h2>
+        <p class="text-white/40 text-base mb-12 max-w-lg leading-relaxed">
+          {lang === 'en'
+            ? "I'm open to freelance projects, consulting, and interesting collaborations — especially in AI tooling, automation, and creative technology."
+            : 'Jestem otwarty na projekty freelance, konsulting i ciekawe współprace — szczególnie w obszarze narzędzi AI, automatyzacji i technologii kreatywnych.'}
+        </p>
+
+        <div class="grid sm:grid-cols-3 gap-4">
+          {items[lang].map(item => (
+            <a
+              href={item.href}
+              target={item.href.startsWith('mailto') ? undefined : '_blank'}
+              rel={item.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+              class="group flex items-center gap-4 p-5 rounded-2xl border border-white/[0.06] bg-white/[0.02] hover:border-indigo-500/30 hover:bg-indigo-500/5 transition-all"
+            >
+              <span class="text-2xl">{item.icon}</span>
+              <div>
+                <div class="text-xs text-white/30 font-medium mb-0.5">{item.label}</div>
+                <div class="text-sm font-semibold text-white/70 group-hover:text-white transition-colors break-all">
+                  {item.value}
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

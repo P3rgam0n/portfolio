@@ -1,0 +1,116 @@
+---
+interface Props {
+  lang: 'en' | 'pl';
+}
+const { lang } = Astro.props;
+
+const avatarUrl = 'https://avatars.githubusercontent.com/u/43683663?v=4';
+
+const title = {
+  en: "Hi, I'm Michał Jura",
+  pl: 'Cześć, jestem Michał Jura',
+};
+const role = {
+  en: '3D Graphics & Automation Specialist',
+  pl: 'Specjalista ds. grafiki 3D i automatyzacji',
+};
+const sub = {
+  en: 'I build production-grade AI tooling, automation systems, and creative software — from multi-agent research pipelines to ComfyUI plugins and Windows utilities.',
+  pl: 'Tworzę narzędzia AI klasy produkcyjnej, systemy automatyzacji i oprogramowanie kreatywne — od wieloagentowych pipeline\'ów badawczych po pluginy ComfyUI i narzędzia Windows.',
+};
+const cta1 = { en: 'View Projects', pl: 'Zobacz projekty' };
+const cta2 = { en: 'GitHub', pl: 'GitHub' };
+---
+
+<section
+  id="hero"
+  class="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-20 overflow-hidden"
+>
+  <!-- Background glow blobs -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-purple-600/8 rounded-full blur-[100px]"></div>
+  </div>
+
+  <div class="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center gap-8">
+
+    <!-- Avatar -->
+    <div class="animate-fade-up">
+      <div class="relative inline-block">
+        <div class="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 blur-xl opacity-40 scale-110"></div>
+        <img
+          src={avatarUrl}
+          alt="Michał Jura"
+          width="96"
+          height="96"
+          class="relative w-24 h-24 rounded-full border-2 border-white/10 object-cover"
+          loading="eager"
+        />
+      </div>
+    </div>
+
+    <!-- Eyebrow -->
+    <div class="animate-fade-up delay-100">
+      <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold tracking-wider uppercase">
+        <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
+        {lang === 'en' ? 'Available for projects' : 'Dostępny na projekty'}
+      </span>
+    </div>
+
+    <!-- Headline -->
+    <div class="animate-fade-up delay-200">
+      <h1 class="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-none">
+        <span class="text-white">{title[lang].split(',')[0]},</span><br />
+        <span class="gradient-text">{title[lang].split(',')[1]?.trim()}</span>
+      </h1>
+    </div>
+
+    <!-- Role badge -->
+    <div class="animate-fade-up delay-300">
+      <p class="text-xl md:text-2xl font-semibold text-white/70">
+        {role[lang]}
+      </p>
+    </div>
+
+    <!-- Sub -->
+    <div class="animate-fade-up delay-400">
+      <p class="max-w-2xl text-base md:text-lg text-white/45 leading-relaxed">
+        {sub[lang]}
+      </p>
+    </div>
+
+    <!-- CTAs -->
+    <div class="animate-fade-up delay-500 flex flex-wrap items-center justify-center gap-4">
+      <a
+        href="#projects"
+        class="px-7 py-3 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all hover:shadow-lg hover:shadow-indigo-500/25 hover:-translate-y-0.5"
+      >
+        {cta1[lang]} →
+      </a>
+      <a
+        href="https://github.com/P3rgam0n"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="px-7 py-3 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-white/70 hover:text-white font-semibold text-sm transition-all hover:-translate-y-0.5"
+      >
+        {cta2[lang]}
+      </a>
+    </div>
+
+    <!-- Tech badges -->
+    <div class="animate-fade-up delay-600 flex flex-wrap justify-center gap-2 mt-2">
+      {['Python', 'Google Cloud', 'Gemini AI', 'ComfyUI', 'Amazon Bedrock', 'Astro'].map(t => (
+        <span class="px-3 py-1 rounded-full bg-white/5 border border-white/8 text-white/40 text-xs font-medium">
+          {t}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-30" aria-hidden="true">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
